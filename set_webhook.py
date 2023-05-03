@@ -1,11 +1,28 @@
-from telegram import Bot
+# from telegram import Bot
+# import os
+
+# url = 'https://echobotrustambek.pythonanywhere.com/webhook'
+
+# TOKEN = '6162217632:AAEnncQeDNHOnSCAlMw0PTxbkJpAQQdL2X4'
+
+# bot = Bot(TOKEN)
+
+# print(bot.set_webhook(url))
+# print(bot.get_webhook_info())
+import requests
 import os
 
 url = 'https://echobotrustambek.pythonanywhere.com/webhook'
 
-TOKEN = '6162217632:AAGgQkGHbF2O3oaYbknbk9XhhVyMBAJjEdM'
+Token = '6162217632:AAEnncQeDNHOnSCAlMw0PTxbkJpAQQdL2X4'
 
-bot = Bot(TOKEN)
+payload = {
+    "url":url
+}
 
-print(bot.set_webhook(url))
-print(bot.get_webhook_info())
+r = requests.get(f"https://api.telegram.org/bot{Token}/setWebhook", params=payload)
+r = requests.get(f"https://api.telegram.org/bot{Token}/GetWebhookInfo", params=payload)
+
+
+
+print(r.json())
