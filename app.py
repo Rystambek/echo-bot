@@ -1,6 +1,6 @@
 from telegram.ext import Updater, CommandHandler,CallbackQueryHandler,Dispatcher
 from telegram import Update,Bot
-from bot import start
+from handler import start
 from flask import Flask, request
 import os
 
