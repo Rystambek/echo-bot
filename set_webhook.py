@@ -1,12 +1,11 @@
-import requests
+from telegram import Bot
 import os
 
-url = 'https://rustambek2003.pythonanywhere.com/webhook'
+url = 'https://echobotrustambek.pythonanywhere.com/webhook'
 
 TOKEN= os.environ['TOKEN']
-payload = {
-    'url':url,
-}
 
-r = requests.get(f"https://api.telegram.org/bot{TOKEN}/setWebhook",params=payload)
-print(r.status_code)
+bot = Bot(TOKEN)
+
+print(bot.set_webhook(url))
+print(bot.get_webhook_info())

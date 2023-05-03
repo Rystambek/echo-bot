@@ -1,25 +1,36 @@
+from telegram.ext import Updater, CommandHandler,CallbackQueryHandler,Dispatcher
+from telegram import Update,Bot
+from bot import start
 from flask import Flask, request
-import requests
-import os 
+import os
+
+# get token from environment variable
+TOKEN = os.environ.get('TOKEN')
+
+bot = Bot(token=TOKEN)
 
 app = Flask(__name__)
 
-TOKEN = os.environ.get('TOKEN')
+@app.route('/', methods=['GET'])
+def main():
+    return 'OK'
 
-@app.route('/webhook', methods = ['POST'])
-def webhook():
-    data = request.get_json(force=True)
+if __name__ == '__main__':
+    app.run(debug=True)
+
+@app.route('/webhook', methods=["POST", "GET"])
+def hello():
+    if request.method == 'GET':
+        return 'flask is working'
+    elif request.method == "POST":
+        data = request.get_json(force = True)
+        
+        dp: Dispatcher = Dispatcher(bot, update_queue=None, workers=0)
+        update:Update = Update.de_json(data, bot)
     
-    chat_id = data['message']['from']['id']
-    text = data['message']['text']
+        #update 
+                
+        dp.add_handler(CommandHandler("start",start))
 
-    payload = {
-        "chat_id":chat_id,
-        "text" : text
-    }
-    print(chat_id, text)
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-    r = requests.get(url=url, params=payload )
-
-    return 'ok'
-
+        dp.process_update(update)
+        return 'ok'
