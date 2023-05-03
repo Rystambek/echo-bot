@@ -3,7 +3,7 @@ import os
 
 url = 'https://echobotrustambek.pythonanywhere.com/webhook'
 
-TOKEN= os.environ['TOKEN']
+TOKEN = '6162217632:AAGgQkGHbF2O3oaYbknbk9XhhVyMBAJjEdM'
 
 bot = Bot(TOKEN)
 

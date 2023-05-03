@@ -5,7 +5,7 @@ from flask import Flask, request
 import os
 
 # get token from environment variable
-TOKEN = os.environ.get('TOKEN')
+TOKEN = '6162217632:AAGgQkGHbF2O3oaYbknbk9XhhVyMBAJjEdM'
 
 bot = Bot(token=TOKEN)
 
